@@ -34,7 +34,7 @@ def get_text_from_file(file):
 
 # Split text into chunks
 def get_chunks(text):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=200)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
     chunks = text_splitter.split_text(text)
     return chunks
 
@@ -129,13 +129,14 @@ if st.button("Get Answer"):
 # Display chat history
 if st.session_state.history:
     for message in reversed(st.session_state.history):
-        if message["role"] == "user":
+        if message["role"] == "bot":
             st.markdown(
-                f'<div style="text-align: right; background-color: #e0f7fa; padding: 10px; border-radius: 10px; margin: 5px;">{message["message"]}</div>',
+                f'<div style="text-align: left; background-color: #1a237e; color: white; padding: 10px; border-radius: 10px; margin: 5px;">{message["message"]}</div>',
                 unsafe_allow_html=True
             )
+
         else:
             st.markdown(
-                f'<div style="text-align: left; background-color: #f1f8e9; padding: 10px; border-radius: 10px; margin: 5px;">{message["message"]}</div>',
+                f'<div style="text-align: left; background-color: #1a237e; padding: 10px; border-radius: 10px; margin: 5px;">{message["message"]}</div>',
                 unsafe_allow_html=True
             )
